@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+    <typeAliases>
+        <typeAlias alias="User" type="com.jerome.model.User"/>
+    </typeAliases>
+
+    <!-- 配置数据源相关的信息 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+
+                <!-- 任意时间存在的活动连接数，默认为10 -->
+                <property name="poolMaximumActiveConnections" value="${jdbc.poolMaximumActiveConnections}"/>
+                <!-- 任意时间存在的空闲连接数，默认为5 -->
+                <property name="poolMaximumIdleConnections" value="${jdbc.poolMaximumIdleConnections}"/>
+
+                <property name="poolPingEnabled" value="true"/>
+                <property name="poolPingQuery" value="SELECT NOW() FROM DUAL"/>
+                <property name="poolPingConnectionsNotUsedFor" value="3600000"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 列出映射文件 -->
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>
+
